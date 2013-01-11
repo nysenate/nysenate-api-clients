@@ -1,0 +1,11 @@
+java/target
+*.swp
+*~
+*.properties
+*.ini
+*.cfg
+*.xml
+
+.classpath
+.settings
+.project
