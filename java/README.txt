@@ -13,6 +13,10 @@ Testing currently requires live access to the running API.
 
 The test reports are stored in `target/surefire-reports` for future references and/or processing.
 
+To do a more granular test use a command in the following format:
+
+    mvn test -Dtest=NYSenateClientTest#testGetCommittee
+
 
 Packaging
 ------------
