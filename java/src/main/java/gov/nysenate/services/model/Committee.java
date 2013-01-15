@@ -3,29 +3,29 @@ package gov.nysenate.services.model;
 import java.util.ArrayList;
 
 public class Committee {
-	String name;
-	String shortName;
-	String url;
-	ArrayList<Member> chairs;
-	ArrayList<Member> members;
-	
+	private String name;
+	private String shortName;
+	private String url;
+	private ArrayList<Member> chairs;
+	private ArrayList<Member> members;
+
 	public Committee() {
-		this(null, null, null);
+		this("", "", "");
 	}
-	
+
 	public Committee(String name, String shortName, String url) {
 		this(name, shortName, url, new ArrayList<Member>(), new ArrayList<Member>());
 	}
-	
+
 	public Committee(String name, String shortName, String url,
-				ArrayList<Member> chairs, 
+				ArrayList<Member> chairs,
 				ArrayList<Member> members) {
-		
-		this.name = name;
-		this.shortName = shortName;
-		this.url = url;
-		this.chairs = chairs;
-		this.members = members;
+
+		this.setName(name);
+		this.setShortName(shortName);
+		this.setUrl(url);
+		this.setChairs(chairs);
+		this.setMembers(members);
 	}
 
 	public String getName() {
@@ -49,30 +49,22 @@ public class Committee {
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = name==null ? "" : name;
 	}
 
 	public void setShortName(String shortName) {
-		this.shortName = shortName;
+		this.shortName = shortName==null ? "" : shortName;
 	}
 
 	public void setUrl(String url) {
-		this.url = url;
+		this.url = url==null ? "" : url;
 	}
 
 	public void setChairs(ArrayList<Member> chairs) {
-		this.chairs = chairs;
+		this.chairs = chairs==null ? new ArrayList<Member>() : chairs;
 	}
 
 	public void setMembers(ArrayList<Member> members) {
-		this.members = members;
-	}
-	
-	public void addMember(Member member) {
-		this.members.add(member);
-	}
-	
-	public void addChair(Member member) {
-		this.chairs.add(member);
+		this.members = members==null ? new ArrayList<Member>() : members;
 	}
 }

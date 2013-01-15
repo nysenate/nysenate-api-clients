@@ -1,24 +1,22 @@
 package gov.nysenate.services.model;
 
 public class Member {
-	String name;
-	String shortName;
-	String url;
-	
+	private String name;
+	private String shortName;
+	private String url;
+
 	public Member() {
-		
+	    this("", "", "");
 	}
-	
+
 	public Member(String name, String shortName, String url) {
-		this.name = name;
-		this.shortName = shortName;
-		this.url = url;
+		this.setName(name);
+		this.setShortName(shortName);
+		this.setUrl(url);
 	}
-	
+
 	public Member(Senator senator) {
-		this.name = senator.getName();
-		this.shortName = senator.getShortName();
-		this.url = senator.getUrl();
+	    this(senator.getName(), senator.getShortName(), senator.getUrl());
 	}
 
 	public String getName() {
@@ -34,14 +32,14 @@ public class Member {
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = name==null ? "" : name;
 	}
 
 	public void setShortName(String shortName) {
-		this.shortName = shortName;
+		this.shortName = shortName==null ? "" : shortName;
 	}
 
 	public void setUrl(String url) {
-		this.url = url;
+		this.url = url==null ? "" : url;
 	}
 }

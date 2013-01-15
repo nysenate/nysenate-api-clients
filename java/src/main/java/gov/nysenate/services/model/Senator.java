@@ -3,25 +3,25 @@ package gov.nysenate.services.model;
 import java.util.ArrayList;
 
 public class Senator {
-	String name;
-	String lastName;
-	String shortName;
+	private String name;
+	private String lastName;
+	private String shortName;
 
-	String email;
-	String additionalContact;
+	private String email;
+	private String additionalContact;
 
-	String imageUrl;
+	private String imageUrl;
 
-	String url;
+	private String url;
 
-	ArrayList<String> partyAffiliations;
+	private ArrayList<String> partyAffiliations;
 
-	ArrayList<Office> offices;
-	District district;
-	Social social;
+	private ArrayList<Office> offices;
+	private District district;
+	private Social social;
 
 	public Senator() {
-		this(null, null, null, null, null, null, null);
+		this("", "", "", "", "", "", "");
 	}
 
 	public Senator(String name, String lastName, String shortName,
@@ -33,22 +33,18 @@ public class Senator {
 	public Senator(String name, String lastName, String shortName,
 			String email, String additionalContact, String imageUrl, String url,
 			District district, Social social, ArrayList<Office> offices, ArrayList<String> partyAffiliations) {
-		this.name = name;
-		this.lastName = lastName;
-		this.shortName = shortName;
 
-		this.email = email;
-		this.additionalContact = additionalContact;
-
-		this.imageUrl = imageUrl;
-
-		this.url = url;
-
-		this.partyAffiliations = partyAffiliations;
-
-		this.district = district;
-		this.offices = offices;
-		this.social = social;
+	    this.setName(name);
+	    this.setLastName(lastName);
+	    this.setShortName(shortName);
+	    this.setEmail(email);
+	    this.setAdditionalContact(additionalContact);
+	    this.setImageUrl(imageUrl);
+	    this.setUrl(url);
+	    this.setPartyAffiliations(partyAffiliations);
+	    this.setDistrict(district);
+	    this.setOffices(offices);
+	    this.setSocial(social);
 	}
 
 	public String getName() {
@@ -96,50 +92,46 @@ public class Senator {
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = name==null ? "" : name;
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastName = lastName==null ? "" : lastName;
 	}
 
 	public void setShortName(String shortName) {
-		this.shortName = shortName;
+		this.shortName = shortName==null ? "" : shortName;
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = email==null ? "" : email;
 	}
 
 	public void setAdditionalContact(String additionalContact) {
-		this.additionalContact = additionalContact;
+		this.additionalContact = additionalContact==null ? "" : additionalContact;
 	}
 
 	public void setPartyAffiliations(ArrayList<String> partyAffiliations) {
-		this.partyAffiliations = partyAffiliations;
+		this.partyAffiliations = partyAffiliations==null ? new ArrayList<String>() : partyAffiliations;
 	}
 
 	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+		this.imageUrl = imageUrl==null ? "" : imageUrl;
 	}
 
 	public void setUrl(String url) {
-		this.url = url;
+		this.url = url==null ? "" : url;
 	}
 
 	public void setDistrict(District district) {
-		this.district = district;
+		this.district = district==null ? new District() : district;
 	}
 
 	public void setOffices(ArrayList<Office> offices) {
-	    this.offices = offices;
+	    this.offices = offices==null ? new ArrayList<Office>() : offices;
 	}
 
 	public void setSocial(Social social) {
-		this.social = social;
-	}
-
-	public void addPartyAffiliation(String affiliation) {
-		this.partyAffiliations.add(affiliation);
+		this.social = social==null ? new Social() : social;
 	}
 }

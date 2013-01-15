@@ -1,18 +1,24 @@
 package gov.nysenate.services.model;
 
 public class District {
-	int number;
-	String imageUrl;
-	String mapUrl;
-	
+	private int number;
+	private String url;
+	private String imageUrl;
+	private String mapUrl;
+
 	public District() {
-		
+	    this(0, "", "", "");
 	}
-	
-	public District(int number, String imageUrl, String mapUrl) {
-		this.number = number;
-		this.imageUrl = imageUrl;
-		this.mapUrl = mapUrl;
+
+	public District(int number, String url, String imageUrl, String mapUrl) {
+		this.setNumber(number);
+		this.setImageUrl(imageUrl);
+		this.setUrl(mapUrl);
+		this.setMapUrl(mapUrl);
+	}
+
+	public String getUrl() {
+	    return url;
 	}
 
 	public int getNumber() {
@@ -31,11 +37,15 @@ public class District {
 		this.number = number;
 	}
 
+	public void setUrl(String url) {
+        this.url = url==null ? "" : url;
+    }
+
 	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+		this.imageUrl = imageUrl==null ? "" : imageUrl;
 	}
 
 	public void setMapUrl(String mapUrl) {
-		this.mapUrl = mapUrl;
+		this.mapUrl = mapUrl==null ? "" : mapUrl;
 	}
 }
