@@ -13,7 +13,7 @@ public class District {
 	public District(int number, String url, String imageUrl, String mapUrl) {
 		this.setNumber(number);
 		this.setImageUrl(imageUrl);
-		this.setUrl(mapUrl);
+		this.setUrl(url);
 		this.setMapUrl(mapUrl);
 	}
 

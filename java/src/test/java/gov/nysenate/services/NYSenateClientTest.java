@@ -60,6 +60,7 @@ public class NYSenateClientTest {
         assertEquals(3, district.getNumber());
         assertEquals("http://geo.nysenate.gov/maps/regular.jsp?x=850&y=595&sd=03",district.getMapUrl());
         assertEquals("http://www.nysenate.gov/files/sd3.jpg", district.getImageUrl());
+        assertEquals("http://www.nysenate.gov/district/03", district.getUrl());
     }
 
     @Test
