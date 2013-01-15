@@ -14,15 +14,10 @@ import java.util.List;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
-import org.apache.xmlrpc.client.XmlRpcCommonsTransportFactory;
 
 public class NYSenateService {
     private final Logger logger = Logger.getLogger(NYSenateClient.class);
@@ -51,7 +46,6 @@ public class NYSenateService {
         }
 
         client = new XmlRpcClient();
-        client.setTransportFactory(new XmlRpcCommonsTransportFactory(client));
         client.setConfig(config);
     }
 
@@ -59,7 +53,7 @@ public class NYSenateService {
         // Order of parameters matters!
         Object[] requiredParams = {nid};
         Object[] optionalParams = fields;
-        return getXmlRpcResponse(METHOD.NODE_GET, ArrayUtils.addAll(requiredParams,optionalParams));
+        return getXmlRpcResponse(METHOD.NODE_GET, concat(requiredParams,optionalParams));
     }
 
     public Object getView(String viewName, Object...viewParameters) throws XmlRpcException {
@@ -91,43 +85,78 @@ public class NYSenateService {
             formatOutput
         };
 
-        return getXmlRpcResponse(METHOD.VIEWS_GET, ArrayUtils.addAll(ArrayUtils.addAll(requiredParams, optionalParams), viewParams));
+        return getXmlRpcResponse(METHOD.VIEWS_GET, concat(requiredParams, optionalParams, viewParams));
     }
 
     public Object getXmlRpcResponse(METHOD method, Object...parameters) throws XmlRpcException {
         // Computer security fields with current time stamp.
         long time = System.currentTimeMillis();
-        String nonce = generateServiceNonce(time);
-        String hash = generateServicesHash(time, nonce, method.getValue());
+        String nonce = getMD5(String.valueOf(time)).substring(0, 20);
+        String[] hashParts = {String.valueOf(time), apiDomain, nonce, method.getValue()};
+        String hash = getHmacSHA256(join(";", hashParts));
 
         // Order of parameters counts; security first!
         List<Object> requestParameters = new ArrayList<Object>();
         requestParameters.addAll(Arrays.asList(hash, apiDomain, String.valueOf(time), nonce));
         requestParameters.addAll(Arrays.asList(parameters));
-        logger.debug(method.getValue()+" - "+StringUtils.join(parameters,", "));
+        logger.debug(method.getValue()+" - "+join(", ",parameters));
         return client.execute(method.getValue(), requestParameters);
     }
 
-    public String generateServiceNonce(long time) {
-        MessageDigest md5 = DigestUtils.getMd5Digest();
-        byte[] md5Digest = md5.digest(String.valueOf(time).getBytes());
-        return Hex.encodeHexString(md5Digest).substring(0,20);
-    }
 
-    public String generateServicesHash(long time, String nonce, String methodName) {
+    // Here I implement a series of utility functions myself to avoid dependencies.
+    private String getHmacSHA256(String source) {
         try {
-            String[] hashParts = {String.valueOf(time), apiDomain, nonce, methodName};
             SecretKeySpec secret = new SecretKeySpec(apiKey.getBytes(),"HmacSHA256");
+
             Mac mac = Mac.getInstance("HmacSHA256");
             mac.init(secret);
-            byte[] shaDigest = mac.doFinal(StringUtils.join(hashParts, ";").getBytes());
-            return Hex.encodeHexString(shaDigest);
+            byte[] shaDigest = mac.doFinal(source.getBytes());
+
+            return getHex(shaDigest);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            throw new IllegalArgumentException("hmacSHA256 should be available as a built in.");
+            throw new RuntimeException("hmacSHA256 should be available as a built in.");
         } catch (InvalidKeyException e) {
             e.printStackTrace();
-            throw new IllegalArgumentException("the secret key should be compatible with our MAC aglorithm.");
+            throw new RuntimeException("the secret key should be compatible with our MAC aglorithm.");
         }
+    }
+
+    private String getMD5(String source) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] digest = md.digest(source.getBytes());
+            return getHex(digest);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("md5 not available on this platform.");
+        }
+    }
+
+    private String join(String separator, Object...parts) {
+        StringBuffer sb = new StringBuffer(parts[0].toString());
+        for (int i=1; i<parts.length; i++) {
+            sb.append(separator+parts[i].toString());
+        }
+        return sb.toString();
+    }
+
+    private String getHex(byte[] source) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < source.length; ++i) {
+            // toHexString does not 0 pad the hex string
+            // 0x100).substring(1,3); does this padding
+            sb.append(Integer.toHexString((source[i] & 0xFF) | 0x100).substring(1,3));
+        }
+        return sb.toString();
+    }
+
+    private <T> T[] concat(T[]...args) {
+        ArrayList<T> full = new ArrayList<T>();
+        for (T[] arg : args) {
+            full.addAll(Arrays.asList(arg));
+        }
+        return (T[])full.toArray();
+
     }
 }
