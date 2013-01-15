@@ -121,7 +121,8 @@ public class NYSenateClient extends NYSenateService {
         int districtNumber = new Integer(unwrap(String.class, districtMap.get("field_district_number"), "value"));
         String districtImageUrl = BASE_URL + unwrap(String.class, districtMap.get("field_district_map"),"filepath");
         String districtSageUrl = unwrap(String.class, districtMap.get("field_sage_map"),"url");
-        return new District(districtNumber, districtImageUrl, districtSageUrl);
+        String districtUrl = BASE_URL + as(String.class, districtMap.get("path"));
+        return new District(districtNumber, districtUrl,  districtImageUrl, districtSageUrl);
     }
 
     private Office getOffice(HashMap<String, String> officeMap) {
