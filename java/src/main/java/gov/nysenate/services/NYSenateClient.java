@@ -50,10 +50,11 @@ public class NYSenateClient extends NYSenateService {
         String name = as(String.class, committeeMap.get("title")).trim();
         logger.info("Got node id: " + nid + " for committee " + name);
         String shortName = unwrap(String.class, committeeMap.get("field_short_name"), "value").trim();
+        String videoUrl = "http://www.livestream.com/"+unwrap(String.class, committeeMap.get("field_video"), "value").trim();
         String url = BASE_URL + as(String.class, committeeMap.get("path"));
         ArrayList<Member> members = getMembers(as(Object[].class, committeeMap.get("field_multi_senator")));
         ArrayList<Member> chairs = getMembers(as(Object[].class, committeeMap.get("field_chairs")));
-        return new Committee(name, shortName, url, chairs, members);
+        return new Committee(name, shortName, url, videoUrl, chairs, members);
     }
 
     @SuppressWarnings("unchecked")

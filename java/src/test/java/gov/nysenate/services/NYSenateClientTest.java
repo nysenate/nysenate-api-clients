@@ -70,6 +70,7 @@ public class NYSenateClientTest {
         assertEquals("Aging", committee.getName());
         assertEquals("aging", committee.getShortName());
         assertEquals("http://www.nysenate.gov/committee/aging", committee.getUrl());
+        assertEquals("http://www.livestream.com/nysenate_aging", committee.getVideoUrl());
 
         // Check Chairs
         assertEquals(1,committee.getChairs().size());

@@ -6,24 +6,26 @@ public class Committee {
 	private String name;
 	private String shortName;
 	private String url;
+	private String videoUrl;
 	private ArrayList<Member> chairs;
 	private ArrayList<Member> members;
 
 	public Committee() {
-		this("", "", "");
+		this("", "", "","");
 	}
 
-	public Committee(String name, String shortName, String url) {
-		this(name, shortName, url, new ArrayList<Member>(), new ArrayList<Member>());
+	public Committee(String name, String shortName, String url, String videoUrl) {
+		this(name, shortName, url, videoUrl, new ArrayList<Member>(), new ArrayList<Member>());
 	}
 
-	public Committee(String name, String shortName, String url,
+	public Committee(String name, String shortName, String url, String videoUrl,
 				ArrayList<Member> chairs,
 				ArrayList<Member> members) {
 
 		this.setName(name);
 		this.setShortName(shortName);
 		this.setUrl(url);
+		this.setVideoUrl(videoUrl);
 		this.setChairs(chairs);
 		this.setMembers(members);
 	}
@@ -38,6 +40,10 @@ public class Committee {
 
 	public String getUrl() {
 		return url;
+	}
+
+	public String getVideoUrl() {
+	    return videoUrl;
 	}
 
 	public ArrayList<Member> getChairs() {
@@ -58,6 +64,10 @@ public class Committee {
 
 	public void setUrl(String url) {
 		this.url = url==null ? "" : url;
+	}
+
+	public void setVideoUrl(String videoUrl) {
+	    this.videoUrl = videoUrl==null ? "" : videoUrl;
 	}
 
 	public void setChairs(ArrayList<Member> chairs) {
