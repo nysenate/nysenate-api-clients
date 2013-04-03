@@ -155,11 +155,14 @@ public class NYSenateClient extends NYSenateService {
         ArrayList<Member> members = new ArrayList<Member>();
         for(Object object:memberObjects) {
             HashMap<String,Object> memberMap = as(HashMap.class, object);
-            int nid = new Integer(as(String.class, memberMap.get("nid")));
+            String nid_string = as(String.class, memberMap.get("nid"));
             try {
+                int nid = new Integer(nid_string);
                 members.add(new Member(getSenator(nid)));
             } catch (XmlRpcException e) {
                 logger.error("Member could not be retrieved.",e);
+            } catch (NumberFormatException e) {
+                logger.warn("invalid nid `"+nid_string+"` found. Skipping");
             }
         }
 
