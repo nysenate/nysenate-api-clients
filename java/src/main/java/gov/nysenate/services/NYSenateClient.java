@@ -13,7 +13,8 @@ import java.util.HashMap;
 import org.apache.log4j.Logger;
 import org.apache.xmlrpc.XmlRpcException;
 
-public class NYSenateClient extends NYSenateService {
+public class NYSenateClient extends NYSenateService
+{
     public static enum METHOD {
         NODE_GET("node.get"),VIEWS_GET("views.get");
         private final String value;
@@ -24,12 +25,14 @@ public class NYSenateClient extends NYSenateService {
     private final Logger logger = Logger.getLogger(NYSenateClient.class);
     protected final String BASE_URL = "http://www.nysenate.gov/";
 
-	public NYSenateClient(String apiDomain,  String apiKey) {
+	public NYSenateClient(String apiDomain,  String apiKey)
+	{
 	    super(apiDomain, apiKey);
 	}
 
     @SuppressWarnings("unchecked")
-    public ArrayList<Committee> getStandingCommittees() throws XmlRpcException {
+    public ArrayList<Committee> getStandingCommittees() throws XmlRpcException
+    {
         ArrayList<Committee> committees = new ArrayList<Committee>();
         for(Object committee:as(Object[].class, getView("committees", "block_1"))) {
             HashMap<String,Object> committeeMap = as(HashMap.class, committee);
@@ -40,13 +43,15 @@ public class NYSenateClient extends NYSenateService {
     }
 
     @SuppressWarnings("unchecked")
-    public Committee getCommittee(int nid) throws XmlRpcException {
+    public Committee getCommittee(int nid) throws XmlRpcException
+    {
         logger.debug("Fetching committee node id: "+nid);
         Object node = getNode(nid);
         HashMap<String,Object> committeeMap = as(HashMap.class, node);
 
-        if(!as(String.class,committeeMap.get("type")).equals("committee"))
+        if(!as(String.class,committeeMap.get("type")).equals("committee")) {
             return null;
+        }
 
         String name = as(String.class, committeeMap.get("title")).trim();
         logger.info("Got node id: " + nid + " for committee " + name);
@@ -59,7 +64,8 @@ public class NYSenateClient extends NYSenateService {
     }
 
     @SuppressWarnings("unchecked")
-    public ArrayList<Senator> getSenators() throws XmlRpcException {
+    public ArrayList<Senator> getSenators() throws XmlRpcException
+    {
         ArrayList<Senator> senators = new ArrayList<Senator>();
         for(Object senator: as(Object[].class,getView("senators"))) {
             HashMap<String,Object> senatorMap = as(HashMap.class, senator);
@@ -70,12 +76,14 @@ public class NYSenateClient extends NYSenateService {
     }
 
     @SuppressWarnings("unchecked")
-    public Senator getSenator(int nodeId) throws XmlRpcException {
+    public Senator getSenator(int nodeId) throws XmlRpcException
+    {
         logger.debug("Fetching senator node id: "+nodeId);
         HashMap<String,Object> senatorMap = as(HashMap.class, getNode(nodeId));
 
-        if(!as(String.class,senatorMap.get("type")).equals("senator"))
+        if(!as(String.class,senatorMap.get("type")).equals("senator")) {
             return null;
+        }
 
         String name = as(String.class, senatorMap.get("title")).trim();
         logger.info("Got node id: " + nodeId + " for senator " + name);
@@ -119,7 +127,8 @@ public class NYSenateClient extends NYSenateService {
     }
 
     @SuppressWarnings("unchecked")
-    public District getDistrict(int nid) throws XmlRpcException {
+    public District getDistrict(int nid) throws XmlRpcException
+    {
         logger.debug("Fetching district node id: "+nid);
         HashMap<String,Object> districtMap = as(HashMap.class, getNode(nid));
         int districtNumber = new Integer(unwrap(String.class, districtMap.get("field_district_number"), "value"));
@@ -129,7 +138,8 @@ public class NYSenateClient extends NYSenateService {
         return new District(districtNumber, districtUrl,  districtImageUrl, districtSageUrl);
     }
 
-    private Office getOffice(HashMap<String, String> officeMap) {
+    private Office getOffice(HashMap<String, String> officeMap)
+    {
         String officeName = as(String.class, officeMap.get("name"));
 
         String street = as(String.class, officeMap.get("street")).trim();
@@ -154,7 +164,8 @@ public class NYSenateClient extends NYSenateService {
     }
 
     @SuppressWarnings("unchecked")
-    private ArrayList<Member> getMembers(Object[] memberObjects) throws XmlRpcException {
+    private ArrayList<Member> getMembers(Object[] memberObjects) throws XmlRpcException
+    {
         ArrayList<Member> members = new ArrayList<Member>();
         for(Object object:memberObjects) {
             HashMap<String,Object> memberMap = as(HashMap.class, object);
@@ -162,46 +173,42 @@ public class NYSenateClient extends NYSenateService {
             try {
                 int nid = new Integer(nid_string);
                 members.add(new Member(getSenator(nid)));
-            } catch (XmlRpcException e) {
+            }
+            catch (XmlRpcException e) {
                 logger.error("Member could not be retrieved.",e);
-            } catch (NumberFormatException e) {
+            }
+            catch (NumberFormatException e) {
                 logger.warn("invalid nid `"+nid_string+"` found. Skipping");
             }
         }
 
-        // TODO: Are there actually duplicates in the data?
-//        TreeSet<Member> set = new TreeSet<Member>(new Comparator<Member>() {
-//              public int compare(Member one, Member two) {
-//                  return one.getShortName().compareTo(two.getShortName());
-//              }
-//          });
-//        set.addAll(members);
-//        members.clear();
-//        members.addAll(set);
-
         return members;
     }
+
 
     //////////////////////////////////////////////////////
     /// Response Parse Helpers
     //////////////////////////////////////////////////////
 
 
-
     @SuppressWarnings("unchecked")
-    private <T> T unwrap(Class<T> clazz, Object object, String key) {
+    private <T> T unwrap(Class<T> clazz, Object object, String key)
+    {
         return as(clazz, ((HashMap<String,Object>)((Object[])object)[0]).get(key));
     }
 
     @SuppressWarnings("unchecked")
-    public <T> T as(Class<T> clazz, Object object) {
-        if(object == null || clazz == null)
+    public <T> T as(Class<T> clazz, Object object)
+    {
+        if(object == null || clazz == null) {
             return null;
-        else if (clazz.isInstance(object))
+        }
+        else if (clazz.isInstance(object)) {
             return (T) object;
+        }
         else {
             //raise some sort of exception here..
+            return null;
         }
-        return null;
     }
 }

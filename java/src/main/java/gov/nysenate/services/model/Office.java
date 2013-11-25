@@ -1,6 +1,7 @@
 package gov.nysenate.services.model;
 
-public class Office {
+public class Office
+{
 	private String name;
 
 	private String street;
@@ -19,16 +20,15 @@ public class Office {
 	private double latitude;
 	private double longitude;
 
-	public Office() {
+	public Office()
+	{
 	    this("", "", "", "", "" ,"", "" ,"", "", "", "", "", 0, 0);
 	}
 
-	public Office(String name, String street, String city,
-			String postalCode, String provinceName, String province,
-			String countryName, String country, String phone, String fax,
-			String otherPhone, String additional, double latitude,
-			double longitude) {
-
+	public Office(String name, String street, String city, String postalCode, String provinceName,
+	        String province, String countryName, String country, String phone, String fax,
+			String otherPhone, String additional, double latitude, double longitude)
+	{
 		this.setName(name);
 		this.setStreet(street);
 		this.setCity(city);
@@ -44,88 +44,143 @@ public class Office {
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
 	}
-	public String getName() {
+
+	public String getName()
+	{
 		return name;
 	}
-	public String getStreet() {
+
+	public String getStreet()
+	{
 		return street;
 	}
-	public String getCity() {
+
+	public String getCity()
+	{
 		return city;
 	}
-	public String getPostalCode() {
+
+	public String getPostalCode()
+	{
 		return postalCode;
 	}
-	public String getProvinceName() {
+
+	public String getProvinceName()
+	{
 		return provinceName;
 	}
-	public String getProvince() {
+
+	public String getProvince()
+	{
 		return province;
 	}
-	public String getCountryName() {
+
+	public String getCountryName()
+	{
 		return countryName;
 	}
-	public String getCountry() {
+
+	public String getCountry()
+	{
 		return country;
 	}
-	public String getPhone() {
+
+	public String getPhone()
+	{
 		return phone;
 	}
-	public String getFax() {
+
+	public String getFax()
+	{
 		return fax;
 	}
-	public String getOtherPhone() {
+
+	public String getOtherPhone()
+	{
 		return otherPhone;
 	}
-	public String getAdditional() {
+
+	public String getAdditional()
+	{
 		return additional;
 	}
-	public double getLatitude() {
+
+	public double getLatitude()
+	{
 		return latitude;
 	}
-	public double getLongitude() {
+
+	public double getLongitude()
+	{
 		return longitude;
 	}
-	public void setName(String name) {
+
+	public void setName(String name)
+	{
 		this.name = name==null ? "" : name;
 	}
-	public void setStreet(String street) {
+
+	public void setStreet(String street)
+	{
 		this.street = street==null ? "" : street;
 	}
-	public void setCity(String city) {
+
+	public void setCity(String city)
+	{
 		this.city = city==null ? "" : city;
 	}
-	public void setPostalCode(String postalCode) {
+
+	public void setPostalCode(String postalCode)
+	{
 		this.postalCode = postalCode==null ? "" : postalCode;
 	}
-	public void setProvinceName(String provinceName) {
+
+	public void setProvinceName(String provinceName)
+	{
 		this.provinceName = provinceName==null ? "" : provinceName;
 	}
-	public void setProvince(String province) {
+	public void setProvince(String province)
+	{
 		this.province = province==null ? "" : province;
 	}
-	public void setCountryName(String countryName) {
+
+	public void setCountryName(String countryName)
+	{
 		this.countryName = countryName==null ? "" : countryName;
 	}
-	public void setCountry(String country) {
+
+	public void setCountry(String country)
+	{
 		this.country = country==null ? "" : country;
 	}
-	public void setPhone(String phone) {
+
+	public void setPhone(String phone)
+	{
 		this.phone = phone==null ? "" : phone;
 	}
-	public void setFax(String fax) {
+
+	public void setFax(String fax)
+	{
 		this.fax = fax==null ? "" : fax;
 	}
-	public void setOtherPhone(String otherPhone) {
+
+	public void setOtherPhone(String otherPhone)
+	{
 		this.otherPhone = otherPhone==null ? "" : otherPhone;
 	}
-	public void setAdditional(String additional) {
+
+	public void setAdditional(String additional)
+	{
 		this.additional = additional==null ? "" : additional;
 	}
-	public void setLatitude(double latitude) {
+
+	public void setLatitude(double latitude)
+	{
 		this.latitude = latitude;
 	}
-	public void setLongitude(double longitude) {
+
+	public void setLongitude(double longitude)
+	{
 		this.longitude = longitude;
 	}
 }

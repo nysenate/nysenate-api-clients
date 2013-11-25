@@ -1,6 +1,7 @@
 package gov.nysenate.services.model;
 
-public class Social {
+public class Social
+{
 	private String twitter;
 	private String youtube;
 	private String myspace;
@@ -8,12 +9,14 @@ public class Social {
 	private String flickr;
 	private String facebook;
 
-	public Social() {
+	public Social()
+	{
 	    this("", "", "", "", "", "");
 	}
 
-	public Social(String twitter, String youtube, String myspace,
-			String picasa, String flickr, String facebook) {
+	public Social(String twitter, String youtube, String myspace, String picasa,
+	        String flickr, String facebook)
+	{
 		this.setTwitter(twitter);
 		this.setYoutube(youtube);
 		this.setMyspace(myspace);
@@ -22,51 +25,63 @@ public class Social {
 		this.setFacebook(facebook);
 	}
 
-	public String getTwitter() {
+	public String getTwitter()
+	{
 		return twitter;
 	}
 
-	public String getYoutube() {
+	public String getYoutube()
+	{
 		return youtube;
 	}
 
-	public String getMyspace() {
+	public String getMyspace()
+	{
 		return myspace;
 	}
 
-	public String getPicasa() {
+	public String getPicasa()
+	{
 		return picasa;
 	}
 
-	public String getFlickr() {
+	public String getFlickr()
+	{
 		return flickr;
 	}
 
-	public String getFacebook() {
+	public String getFacebook()
+	{
 		return facebook;
 	}
 
-	public void setTwitter(String twitter) {
+	public void setTwitter(String twitter)
+	{
 		this.twitter = twitter==null ? "" : twitter;
 	}
 
-	public void setYoutube(String youtube) {
+	public void setYoutube(String youtube)
+	{
 		this.youtube = youtube==null ? "" : youtube;
 	}
 
-	public void setMyspace(String myspace) {
+	public void setMyspace(String myspace)
+	{
 		this.myspace = myspace==null ? "" : myspace;
 	}
 
-	public void setPicasa(String picasa) {
+	public void setPicasa(String picasa)
+	{
 		this.picasa = picasa==null ? "" : picasa;
 	}
 
-	public void setFlickr(String flickr) {
+	public void setFlickr(String flickr)
+	{
 		this.flickr = flickr==null ? "" : flickr;
 	}
 
-	public void setFacebook(String facebook) {
+	public void setFacebook(String facebook)
+	{
 		this.facebook = facebook==null ? "" : facebook;
 	}
 }

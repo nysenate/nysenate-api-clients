@@ -1,47 +1,57 @@
 package gov.nysenate.services.model;
 
-public class Member implements Comparable<Member> {
+public class Member implements Comparable<Member>
+{
     private Integer nid;
 	private String name;
 	private String shortName;
 	private String url;
 
-	public Member() {
+	public Member()
+	{
 	    this(0, "", "", "");
 	}
 
-	public Member(Integer nid, String name, String shortName, String url) {
+	public Member(Integer nid, String name, String shortName, String url)
+	{
 	    this.setNid(nid);
 		this.setName(name);
 		this.setShortName(shortName);
 		this.setUrl(url);
 	}
 
-	public Member(Senator senator) {
+	public Member(Senator senator)
+	{
 	    this(senator.getNid(), senator.getName(), senator.getShortName(), senator.getUrl());
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
-	public String getShortName() {
+	public String getShortName()
+	{
 		return shortName;
 	}
 
-	public String getUrl() {
+	public String getUrl()
+	{
 		return url;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name==null ? "" : name;
 	}
 
-	public void setShortName(String shortName) {
+	public void setShortName(String shortName)
+	{
 		this.shortName = shortName==null ? "" : shortName;
 	}
 
-	public void setUrl(String url) {
+	public void setUrl(String url)
+	{
 		this.url = url==null ? "" : url;
 	}
 
