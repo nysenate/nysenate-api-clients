@@ -19,12 +19,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 
-public class NYSenateClientTest {
-
+public class NYSenateClientTest
+{
     private static NYSenateClient client;
 
     @BeforeClass
-    public static void init() throws IOException {
+    public static void init() throws IOException
+    {
         InputStream configStream = NYSenateClientTest.class.getResourceAsStream("/test.properties");
         if (configStream == null) {
             System.err.println("test.properties configuration file not found on classpath");
@@ -49,22 +50,25 @@ public class NYSenateClientTest {
     }
 
     @Test
-    public void testGetSenators() throws XmlRpcException {
+    public void testGetSenators() throws XmlRpcException
+    {
         ArrayList<Senator> senators = client.getSenators();
-        assertEquals(62,senators.size()); // District 46 still undecided, total=63 soon
+        assertEquals(63,senators.size());
     }
 
     @Test
-    public void testGetDistrict() throws XmlRpcException {
+    public void testGetDistrict() throws XmlRpcException
+    {
         District district = client.getDistrict(86);
-        assertEquals(3, district.getNumber());
+        assertEquals(3, district.getNumber().intValue());
         assertEquals("http://geo.nysenate.gov/maps/regular.jsp?x=850&y=595&sd=03",district.getMapUrl());
         assertEquals("http://www.nysenate.gov/files/sd3.jpg", district.getImageUrl());
         assertEquals("http://www.nysenate.gov/district/03", district.getUrl());
     }
 
     @Test
-    public void testGetCommittee() throws XmlRpcException {
+    public void testGetCommittee() throws XmlRpcException
+    {
         // Spot check with the Aging committee
         Committee committee = client.getCommittee(245);
         assertEquals("Aging", committee.getName());
@@ -75,21 +79,22 @@ public class NYSenateClientTest {
         // Check Chairs
         assertEquals(1,committee.getChairs().size());
         Member chair = committee.getChairs().get(0);
-        assertEquals("David J. Valesky", chair.getName());
-        assertEquals("valesky", chair.getShortName());
-        assertEquals("http://www.nysenate.gov/senator/david-j-valesky", chair.getUrl());
+        assertEquals("Eric Adams", chair.getName());
+        assertEquals("adams", chair.getShortName());
+        assertEquals("http://www.nysenate.gov/senator/eric-adams", chair.getUrl());
 
         // Check member count order is arbitrary but consistent.
         // Greg Ball is the first one up, check on him.
         assertEquals(11, committee.getMembers().size());
         Member member = committee.getMembers().get(0);
-        assertEquals("Greg Ball", member.getName());
-        assertEquals("ball", member.getShortName());
-        assertEquals("http://www.nysenate.gov/senator/greg-ball", member.getUrl());
+        assertEquals("Eric Adams", member.getName());
+        assertEquals("adams", member.getShortName());
+        assertEquals("http://www.nysenate.gov/senator/eric-adams", member.getUrl());
     }
 
     @Test
-    public void testGetSenator() throws XmlRpcException {
+    public void testGetSenator() throws XmlRpcException
+    {
         Senator senator = client.getSenator(101);
         assertEquals("Last name error", "Dilan", senator.getLastName());
         assertEquals("Short name error", "dilan", senator.getShortName());
@@ -100,7 +105,7 @@ public class NYSenateClientTest {
 
         // Check his district
         District district = senator.getDistrict();
-        assertEquals("District# Error", 18, district.getNumber());
+        assertEquals("District# Error", 18, district.getNumber().intValue());
         assertEquals("Map url error", "http://geo.nysenate.gov/maps/regular.jsp?x=850&y=595&sd=18",district.getMapUrl());
         assertEquals("Image url error", "http://www.nysenate.gov/files/sd18.jpg", district.getImageUrl());
 
@@ -123,7 +128,7 @@ public class NYSenateClientTest {
         assertEquals("Albany Office", albanyOffice.getName());
 
         assertEquals("188 State Street", albanyOffice.getStreet());
-        assertEquals("Room 903, Legislative Office Building", albanyOffice.getAdditional());
+        assertEquals("Room 711B, Legislative Office Building", albanyOffice.getAdditional());
         assertEquals("Albany", albanyOffice.getCity());
         assertEquals("NY", albanyOffice.getProvince());
         assertEquals("New York", albanyOffice.getProvinceName());
@@ -131,20 +136,15 @@ public class NYSenateClientTest {
         assertEquals("us", albanyOffice.getCountry());
         assertEquals("United States", albanyOffice.getCountryName());
 
-        assertEquals(42.652855, albanyOffice.getLatitude(), .00001);
-        assertEquals(-73.759091, albanyOffice.getLongitude(), .00001);
-
         assertEquals("(518) 455-2177", albanyOffice.getPhone());
         assertEquals("(518) 426-6947", albanyOffice.getFax());
         assertEquals("", albanyOffice.getOtherPhone());
-
-
     }
 
     @Test
-    public void testGetCommittees() throws XmlRpcException {
+    public void testGetCommittees() throws XmlRpcException
+    {
         ArrayList<Committee> committees = client.getStandingCommittees();
-        assertEquals(33, committees.size()); // Pending creation of new committees
+        assertEquals(35, committees.size()); // Pending creation of new committees
     }
-
 }
