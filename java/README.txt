@@ -32,3 +32,22 @@ To skip the tests:
 To package the dependencies:
 
     mvn dependency:copy-dependencies -DoutputDirectory=<where you want them to go>
+
+ChangeLog
+--------------
+
+1.0.2 - 2013-11-25
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Added node ids to committee, member, and senator objects.
+* Implemented Comparable interface for committee, member, district, and senator objects.
+
+1.0.1 - 2013-04-03
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Fail gracefully when nid is invalid.
+
+1.0.0 - 2013-01-15
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Initial Release.
