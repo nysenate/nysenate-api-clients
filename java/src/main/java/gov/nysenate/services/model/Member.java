@@ -1,22 +1,24 @@
 package gov.nysenate.services.model;
 
-public class Member {
+public class Member implements Comparable<Member> {
+    private Integer nid;
 	private String name;
 	private String shortName;
 	private String url;
 
 	public Member() {
-	    this("", "", "");
+	    this(0, "", "", "");
 	}
 
-	public Member(String name, String shortName, String url) {
+	public Member(Integer nid, String name, String shortName, String url) {
+	    this.setNid(nid);
 		this.setName(name);
 		this.setShortName(shortName);
 		this.setUrl(url);
 	}
 
 	public Member(Senator senator) {
-	    this(senator.getName(), senator.getShortName(), senator.getUrl());
+	    this(senator.getNid(), senator.getName(), senator.getShortName(), senator.getUrl());
 	}
 
 	public String getName() {
@@ -42,4 +44,20 @@ public class Member {
 	public void setUrl(String url) {
 		this.url = url==null ? "" : url;
 	}
+
+    public Integer getNid()
+    {
+        return nid;
+    }
+
+    public void setNid(Integer nid)
+    {
+        this.nid = nid;
+    }
+
+    @Override
+    public int compareTo(Member o)
+    {
+        return this.getNid().compareTo(o.getNid());
+    }
 }

@@ -2,7 +2,8 @@ package gov.nysenate.services.model;
 
 import java.util.ArrayList;
 
-public class Committee {
+public class Committee implements Comparable<Committee> {
+    private Integer nid;
 	private String name;
 	private String shortName;
 	private String url;
@@ -11,17 +12,18 @@ public class Committee {
 	private ArrayList<Member> members;
 
 	public Committee() {
-		this("", "", "","");
+		this(0, "", "", "","");
 	}
 
-	public Committee(String name, String shortName, String url, String videoUrl) {
-		this(name, shortName, url, videoUrl, new ArrayList<Member>(), new ArrayList<Member>());
+	public Committee(Integer nid, String name, String shortName, String url, String videoUrl) {
+		this(nid, name, shortName, url, videoUrl, new ArrayList<Member>(), new ArrayList<Member>());
 	}
 
-	public Committee(String name, String shortName, String url, String videoUrl,
+	public Committee(Integer nid, String name, String shortName, String url, String videoUrl,
 				ArrayList<Member> chairs,
 				ArrayList<Member> members) {
 
+	    this.setNid(nid);
 		this.setName(name);
 		this.setShortName(shortName);
 		this.setUrl(url);
@@ -77,4 +79,20 @@ public class Committee {
 	public void setMembers(ArrayList<Member> members) {
 		this.members = members==null ? new ArrayList<Member>() : members;
 	}
+
+    public Integer getNid()
+    {
+        return nid;
+    }
+
+    public void setNid(Integer nid)
+    {
+        this.nid = nid;
+    }
+
+    @Override
+    public int compareTo(Committee o)
+    {
+        return this.getNid().compareTo(o.getNid());
+    }
 }

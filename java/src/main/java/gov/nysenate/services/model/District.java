@@ -1,7 +1,7 @@
 package gov.nysenate.services.model;
 
-public class District {
-	private int number;
+public class District implements Comparable<District> {
+	private Integer number;
 	private String url;
 	private String imageUrl;
 	private String mapUrl;
@@ -10,7 +10,7 @@ public class District {
 	    this(0, "", "", "");
 	}
 
-	public District(int number, String url, String imageUrl, String mapUrl) {
+	public District(Integer number, String url, String imageUrl, String mapUrl) {
 		this.setNumber(number);
 		this.setImageUrl(imageUrl);
 		this.setUrl(url);
@@ -21,7 +21,7 @@ public class District {
 	    return url;
 	}
 
-	public int getNumber() {
+	public Integer getNumber() {
 		return number;
 	}
 
@@ -33,7 +33,7 @@ public class District {
 		return mapUrl;
 	}
 
-	public void setNumber(int number) {
+	public void setNumber(Integer number) {
 		this.number = number;
 	}
 
@@ -48,4 +48,10 @@ public class District {
 	public void setMapUrl(String mapUrl) {
 		this.mapUrl = mapUrl==null ? "" : mapUrl;
 	}
+
+    @Override
+    public int compareTo(District o)
+    {
+        return this.getNumber().compareTo(o.getNumber());
+    }
 }

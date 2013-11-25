@@ -2,7 +2,8 @@ package gov.nysenate.services.model;
 
 import java.util.ArrayList;
 
-public class Senator {
+public class Senator implements Comparable<Senator> {
+    private Integer nid;
 	private String name;
 	private String lastName;
 	private String shortName;
@@ -21,19 +22,20 @@ public class Senator {
 	private Social social;
 
 	public Senator() {
-		this("", "", "", "", "", "", "");
+		this(0, "", "", "", "", "", "", "");
 	}
 
-	public Senator(String name, String lastName, String shortName,
+	public Senator(Integer nid, String name, String lastName, String shortName,
 			String email, String additionalContact, String imageUrl, String url) {
-		this(name, lastName, shortName, email, additionalContact, imageUrl, url,
+		this(nid, name, lastName, shortName, email, additionalContact, imageUrl, url,
 				new District(), new Social(), new ArrayList<Office>(), new ArrayList<String>());
 	}
 
-	public Senator(String name, String lastName, String shortName,
+	public Senator(Integer nid, String name, String lastName, String shortName,
 			String email, String additionalContact, String imageUrl, String url,
 			District district, Social social, ArrayList<Office> offices, ArrayList<String> partyAffiliations) {
 
+	    this.setNid(nid);
 	    this.setName(name);
 	    this.setLastName(lastName);
 	    this.setShortName(shortName);
@@ -134,4 +136,20 @@ public class Senator {
 	public void setSocial(Social social) {
 		this.social = social==null ? new Social() : social;
 	}
+
+    public Integer getNid()
+    {
+        return nid;
+    }
+
+    public void setNid(Integer nid)
+    {
+        this.nid = nid;
+    }
+
+    @Override
+    public int compareTo(Senator o)
+    {
+        return this.getNid().compareTo(o.getNid());
+    }
 }

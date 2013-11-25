@@ -41,6 +41,7 @@ public class NYSenateClient extends NYSenateService {
 
     @SuppressWarnings("unchecked")
     public Committee getCommittee(int nid) throws XmlRpcException {
+        logger.debug("Fetching committee node id: "+nid);
         Object node = getNode(nid);
         HashMap<String,Object> committeeMap = as(HashMap.class, node);
 
@@ -54,7 +55,7 @@ public class NYSenateClient extends NYSenateService {
         String url = BASE_URL + as(String.class, committeeMap.get("path"));
         ArrayList<Member> members = getMembers(as(Object[].class, committeeMap.get("field_multi_senator")));
         ArrayList<Member> chairs = getMembers(as(Object[].class, committeeMap.get("field_chairs")));
-        return new Committee(name, shortName, url, videoUrl, chairs, members);
+        return new Committee(nid, name, shortName, url, videoUrl, chairs, members);
     }
 
     @SuppressWarnings("unchecked")
@@ -70,6 +71,7 @@ public class NYSenateClient extends NYSenateService {
 
     @SuppressWarnings("unchecked")
     public Senator getSenator(int nodeId) throws XmlRpcException {
+        logger.debug("Fetching senator node id: "+nodeId);
         HashMap<String,Object> senatorMap = as(HashMap.class, getNode(nodeId));
 
         if(!as(String.class,senatorMap.get("type")).equals("senator"))
@@ -110,7 +112,7 @@ public class NYSenateClient extends NYSenateService {
             offices.add(getOffice(as(HashMap.class, object)));
         }
 
-        Senator senator = new Senator(name, lastName, shortName, email, additionalContact,
+        Senator senator = new Senator(nodeId, name, lastName, shortName, email, additionalContact,
                 imageUrl, url, district, senatorSocial, offices, partyAffiliations);
 
         return senator;
@@ -118,6 +120,7 @@ public class NYSenateClient extends NYSenateService {
 
     @SuppressWarnings("unchecked")
     public District getDistrict(int nid) throws XmlRpcException {
+        logger.debug("Fetching district node id: "+nid);
         HashMap<String,Object> districtMap = as(HashMap.class, getNode(nid));
         int districtNumber = new Integer(unwrap(String.class, districtMap.get("field_district_number"), "value"));
         String districtImageUrl = BASE_URL + unwrap(String.class, districtMap.get("field_district_map"),"filepath");
