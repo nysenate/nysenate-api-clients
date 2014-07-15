@@ -1,11 +1,15 @@
-java/target
-*.swp
 *~
-*.properties
-*.ini
+*.class
+*.jar
+
 *.cfg
+*.ini
+*.log
+*.properties
 *.xml
 
+build
+target
 .classpath
-.settings
 .project
+.settings
