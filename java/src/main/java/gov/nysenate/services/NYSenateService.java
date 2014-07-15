@@ -2,6 +2,7 @@ package gov.nysenate.services;
 
 import gov.nysenate.services.NYSenateClient.METHOD;
 
+import java.lang.StringBuilder;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.InvalidKeyException;
@@ -19,27 +20,35 @@ import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 
-public class NYSenateService {
+
+public class NYSenateService
+{
     private final Logger logger = Logger.getLogger(NYSenateClient.class);
 
     protected final XmlRpcClient client;
     protected final String apiDomain;
     protected final String apiKey;
 
-    public NYSenateService(String apiDomain,  String apiKey) {
+
+    public NYSenateService(String apiDomain,  String apiKey)
+    {
         if (apiDomain == null) {
             throw new IllegalArgumentException("apiDomain cannot be null");
-        } else if (apiKey == null) {
+        }
+        else if (apiKey == null) {
             throw new IllegalArgumentException("apiKey cannot be null");
-        } else {
+        }
+        else {
             this.apiDomain = apiDomain;
             this.apiKey = apiKey;
         }
 
         XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
+
         try {
             config.setServerURL(new URL("http://www.nysenate.gov/services/xmlrpc"));
-        } catch (MalformedURLException e) {
+        }
+        catch (MalformedURLException e) {
             // not possible since it is a hard-coded/tested url.
             System.out.println(e);
             throw new RuntimeException("Impossible Malformed URL error for: http://www.nysenate.gov/services/xmlrpc",e); // Just in case...
@@ -49,32 +58,44 @@ public class NYSenateService {
         client.setConfig(config);
     }
 
-    public Object getNode(Integer nid, String...fields) throws XmlRpcException {
+
+    public Object getNode(Integer nid, String...fields) throws XmlRpcException
+    {
         // Order of parameters matters!
-        Object[] requiredParams = {nid};
-        Object[] optionalParams = fields;
-        return getXmlRpcResponse(METHOD.NODE_GET, concat(requiredParams,optionalParams));
+        Object[] requiredParams = { nid };
+        String[] optionalParams = fields;
+        return getXmlRpcResponse(METHOD.NODE_GET, concat(requiredParams, optionalParams));
     }
 
-    public Object getView(String viewName, Object...viewParameters) throws XmlRpcException {
+
+    public Object getView(String viewName, Object...viewParameters) throws XmlRpcException
+    {
         return getView(viewName, null, null, null, false, viewParameters);
     }
 
-    public Object getView(String viewName, String displayId, Object...viewParameters) throws XmlRpcException {
+
+    public Object getView(String viewName, String displayId, Object...viewParameters) throws XmlRpcException
+    {
         return getView(viewName, displayId, null, null, false, viewParameters);
     }
 
-    public Object getView(String viewName, Integer offset, Integer limit, Object...viewParameters) throws XmlRpcException {
+
+    public Object getView(String viewName, Integer offset, Integer limit, Object...viewParameters) throws XmlRpcException
+    {
         return getView(viewName, null, offset, limit, false, viewParameters);
     }
 
-    public Object getView(String viewName, String displayId, Integer offset, Integer limit, Object...viewParameters) throws XmlRpcException {
+
+    public Object getView(String viewName, String displayId, Integer offset, Integer limit, Object...viewParameters) throws XmlRpcException
+    {
         return getView(viewName, displayId, offset, limit, false, viewParameters);
     }
 
-    public Object getView(String viewName, String displayId, Integer offset, Integer limit, boolean formatOutput, Object...viewParameters) throws XmlRpcException {
+
+    public Object getView(String viewName, String displayId, Integer offset, Integer limit, boolean formatOutput, Object...viewParameters) throws XmlRpcException
+    {
         // Order of parameters matters!
-        Object[] requiredParams = {
+        String[] requiredParams = {
             viewName,
             (displayId == null) ? "default" : displayId
         };
@@ -88,7 +109,9 @@ public class NYSenateService {
         return getXmlRpcResponse(METHOD.VIEWS_GET, concat(requiredParams, optionalParams, viewParams));
     }
 
-    public Object getXmlRpcResponse(METHOD method, Object...parameters) throws XmlRpcException {
+
+    public Object getXmlRpcResponse(METHOD method, Object[] parameters) throws XmlRpcException
+    {
         // Computer security fields with current time stamp.
         long time = System.currentTimeMillis();
         String nonce = getMD5(String.valueOf(time)).substring(0, 20);
@@ -99,13 +122,14 @@ public class NYSenateService {
         List<Object> requestParameters = new ArrayList<Object>();
         requestParameters.addAll(Arrays.asList(hash, apiDomain, String.valueOf(time), nonce));
         requestParameters.addAll(Arrays.asList(parameters));
-        logger.debug(method.getValue()+" - "+join(", ",parameters));
+        logger.debug(method.getValue()+" - "+join(", ", parameters));
         return client.execute(method.getValue(), requestParameters);
     }
 
 
     // Here I implement a series of utility functions myself to avoid dependencies.
-    private String getHmacSHA256(String source) {
+    private String getHmacSHA256(String source)
+    {
         try {
             SecretKeySpec secret = new SecretKeySpec(apiKey.getBytes(),"HmacSHA256");
 
@@ -114,35 +138,44 @@ public class NYSenateService {
             byte[] shaDigest = mac.doFinal(source.getBytes());
 
             return getHex(shaDigest);
-        } catch (NoSuchAlgorithmException e) {
+        }
+        catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             throw new RuntimeException("hmacSHA256 should be available as a built in.");
-        } catch (InvalidKeyException e) {
+        }
+        catch (InvalidKeyException e) {
             e.printStackTrace();
             throw new RuntimeException("the secret key should be compatible with our MAC aglorithm.");
         }
     }
 
-    private String getMD5(String source) {
+
+    private String getMD5(String source)
+    {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] digest = md.digest(source.getBytes());
             return getHex(digest);
-        } catch (NoSuchAlgorithmException e) {
+        }
+        catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("md5 not available on this platform.");
         }
     }
 
-    private String join(String separator, Object...parts) {
-        StringBuffer sb = new StringBuffer(parts[0].toString());
-        for (int i=1; i<parts.length; i++) {
+
+    private String join(String separator, Object[] parts)
+    {
+        StringBuilder sb = new StringBuilder(parts[0].toString());
+        for (int i = 1; i < parts.length; i++) {
             sb.append(separator+parts[i].toString());
         }
         return sb.toString();
     }
 
-    private String getHex(byte[] source) {
-        StringBuffer sb = new StringBuffer();
+
+    private String getHex(byte[] source)
+    {
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < source.length; ++i) {
             // toHexString does not 0 pad the hex string
             // 0x100).substring(1,3); does this padding
@@ -151,12 +184,13 @@ public class NYSenateService {
         return sb.toString();
     }
 
-    private <T> T[] concat(T[]...args) {
-        ArrayList<T> full = new ArrayList<T>();
-        for (T[] arg : args) {
+
+    private Object[] concat(Object[]...args)
+    {
+        ArrayList<Object> full = new ArrayList<Object>();
+        for (Object[] arg : args) {
             full.addAll(Arrays.asList(arg));
         }
-        return (T[])full.toArray();
-
+        return (Object[])full.toArray();
     }
 }
