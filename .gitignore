@@ -7,9 +7,11 @@
 *.log
 *.properties
 *.xml
+*.iml
 
 build
 target
 .classpath
 .project
 .settings
+.idea/
