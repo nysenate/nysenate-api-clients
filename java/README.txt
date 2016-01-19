@@ -36,6 +36,12 @@ To package the dependencies:
 ChangeLog
 --------------
 
+2.0.0 - 2016-01-19
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Retrieve senators from new nysenate.gov site using JSON
+* Minor modifications to senator model
+
 1.0.2 - 2013-11-25
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
