@@ -113,8 +113,6 @@ public class NYSenateJSONClient implements NYSenateClientService
             office.setPhone(officeNode.get("phone").asText());
             office.setFax(officeNode.get("fax").asText());
             office.setAdditional(officeNode.get("additional").asText());
-            office.setLatitude(officeNode.get("latitude").asDouble());
-            office.setLongitude(officeNode.get("longitude").asDouble());
             offices.add(office);
         }
         senator.setOffices(offices);
