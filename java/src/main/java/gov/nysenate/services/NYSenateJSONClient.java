@@ -1,13 +1,5 @@
 package gov.nysenate.services;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import gov.nysenate.services.model.District;
-import gov.nysenate.services.model.Office;
-import gov.nysenate.services.model.Senator;
-import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -17,9 +9,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import gov.nysenate.services.model.District;
+import gov.nysenate.services.model.Office;
+import gov.nysenate.services.model.Senator;
+
+
 public class NYSenateJSONClient implements NYSenateClientService
 {
-    private final Logger logger = Logger.getLogger(NYSenateJSONClient.class);
+    private static final Logger logger = LoggerFactory.getLogger(NYSenateJSONClient.class);
 
     protected static final ObjectMapper jsonMapper = new ObjectMapper();
 
