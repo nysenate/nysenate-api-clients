@@ -27,7 +27,7 @@ public class NYSenateJSONClient implements NYSenateClientService
     protected static final ObjectMapper jsonMapper = new ObjectMapper();
 
     protected static Properties prop = null;
-    protected String baseUrl = "http://www.nysenate.gov";
+    protected String baseUrl = "https://www.nysenate.gov";
 
     public NYSenateJSONClient() throws IOException {
         init(null);
@@ -58,10 +58,9 @@ public class NYSenateJSONClient implements NYSenateClientService
 
     @Override
     public List<Senator> getSenators() {
-        HttpURLConnection httpURLConnection = null;
         try {
-            URL senatorsJsonUrl = new URL(baseUrl + "/senators-json");
-            httpURLConnection = (HttpURLConnection) senatorsJsonUrl.openConnection();
+            URL senatorsJsonUrl = new URL(baseUrl + "/senators.json");
+            HttpURLConnection httpURLConnection = (HttpURLConnection) senatorsJsonUrl.openConnection();
             if (httpURLConnection.getResponseCode() == 200) {
                 String response = IOUtils.toString(httpURLConnection.getInputStream());
                 return getSenatorsFromResponse(response);
