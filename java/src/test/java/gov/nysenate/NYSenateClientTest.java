@@ -1,14 +1,12 @@
-package gov.nysenate.services;
+package gov.nysenate;
 
-import gov.nysenate.services.model.Senator;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.List;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class NYSenateClientTest {
     private static NYSenateJSONClient client;
@@ -22,6 +20,6 @@ public class NYSenateClientTest {
     public void testClientReturnsData() {
         List<Senator> senators = client.getSenators();
         assertNotNull(client.getSenators());
-        assertTrue(senators.size() >= 63);
+        assertEquals(63, senators.size());
     }
 }

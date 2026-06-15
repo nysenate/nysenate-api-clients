@@ -1,4 +1,4 @@
-package gov.nysenate.services.model;
+package gov.nysenate;
 
 import java.util.List;
 
