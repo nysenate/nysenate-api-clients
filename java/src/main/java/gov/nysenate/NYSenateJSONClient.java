@@ -7,14 +7,16 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.PropertyNamingStrategies;
+import tools.jackson.databind.json.JsonMapper;
 
 public class NYSenateJSONClient {
-    private static final ObjectMapper jsonMapper = new ObjectMapper()
-        .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
-        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    private static final ObjectMapper jsonMapper = JsonMapper.builder()
+        .propertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
+        .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+        .build();
 
     private static final String DEFAULT_DOMAIN = "https://www.nysenate.gov";
     private final String jsonUrl;
