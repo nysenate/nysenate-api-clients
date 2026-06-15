@@ -5,8 +5,7 @@ import java.util.List;
 import gov.nysenate.services.model.Senator;
 
 
-public interface NYSenateClientService
-{
+public interface NYSenateClientService {
     /**
      * Returns a list of senators.
      * @return List<Senator>
