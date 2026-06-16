@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
-// TODO: add "roles"
 @Getter
 @Setter
 public class Senator {
@@ -15,13 +14,13 @@ public class Senator {
 	private String lastName;
 	private String shortName;
 	private String email;
-	private String additionalContact;
 	@JsonProperty("img")
 	private String imageUrl;
 	private String url;
 	private String summary;
 	@JsonProperty("party")
 	private List<String> parties;
+	private String role;
 	private List<Office> offices;
 	@JsonProperty("senate_district")
 	private Integer districtNumber;

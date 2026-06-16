@@ -1,4 +1,14 @@
 nysenate-api-clients
 ====================
+Client libraries that pull data from the public NYSenate.gov API. Currently only has Java code.
 
-Client libraries in various languages to make it easy for developers to interact with the NYSenate.gov API.
+Published as the Maven artifact `gov.nysenate:nysenate-java-client` (Java 21).
+It consumes the public, unauthenticated feed at https://www.nysenate.gov/senators.json
+
+Usage
+-----
+
+```java
+new NYSenateJSONClient().getSenators();         // default https://www.nysenate.gov
+new NYSenateJSONClient(domain).getSenators();   // a given domain, e.g. a staging site
+```

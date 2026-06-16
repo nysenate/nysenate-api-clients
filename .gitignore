@@ -1,17 +1,10 @@
-*~
-*.class
-*.jar
+# Build output
+target/
 
-*.cfg
-*.ini
+# Logs and editor backups
 *.log
-*.properties
-*.xml
-*.iml
+*~
 
-build
-target
-.classpath
-.project
-.settings
+# IntelliJ
+*.iml
 .idea/

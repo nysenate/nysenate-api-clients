@@ -1,0 +1,30 @@
+ChangeLog
+--------------
+
+3.0.0 - 2026-06-15
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Cleanup of unused code, and simplification of remaining code
+* Moved to Java 21
+
+2.0.0 - 2016-01-19
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Retrieve senators from new nysenate.gov site using JSON
+* Minor modifications to senator model
+
+1.0.2 - 2013-11-25
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Added node ids to committee, member, and senator objects.
+* Implemented Comparable interface for committee, member, district, and senator objects.
+
+1.0.1 - 2013-04-03
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Fail gracefully when nid is invalid.
+
+1.0.0 - 2013-01-15
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Initial Release.
