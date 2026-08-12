@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>gov.nysenate</groupId>
   <artifactId>nysenate-java-client</artifactId>
-  <version>2.3</version>
+  <version>3.0</version>
   <packaging>jar</packaging>
 
   <build>
@@ -10,7 +10,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.12.1</version>
+        <version>3.15.0</version>
         <configuration>
           <release>21</release>
         </configuration>
@@ -19,9 +19,9 @@
   </build>
 
   <properties>
-    <jackson.version>3.2.0</jackson.version>
+    <jackson.version>3.2.1</jackson.version>
     <junit.version>4.13.2</junit.version>
-    <lombok.version>1.18.34</lombok.version>
+    <lombok.version>1.18.46</lombok.version>
   </properties>
 
   <dependencies>
