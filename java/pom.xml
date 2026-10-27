@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>gov.nysenate</groupId>
   <artifactId>nysenate-java-client</artifactId>
-  <version>3.0</version>
+  <version>3.0.1</version>
   <packaging>jar</packaging>
 
   <build>
@@ -19,7 +19,7 @@
   </build>
 
   <properties>
-    <jackson.version>3.2.1</jackson.version>
+    <jackson.version>3.2.4</jackson.version>
     <junit.version>4.13.2</junit.version>
     <lombok.version>1.18.46</lombok.version>
   </properties>

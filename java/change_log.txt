@@ -1,6 +1,11 @@
 ChangeLog
 --------------
 
+3.0.1 - 2026-10-26
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Upgraded Jackson to 3.2.4 to fix security vulnerabilities
+
 3.0.0 - 2026-06-15
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
