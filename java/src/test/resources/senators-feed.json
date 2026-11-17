@@ -1,0 +1,240 @@
+{
+  "data": {
+    "senators": {
+      "addabbo": {
+        "open_leg": {
+          "member_id": "384",
+          "shortname": "addabbo",
+          "district": {
+            "number": 15,
+            "ordinal": "15th"
+          },
+          "is_active": true
+        },
+        "profile": {
+          "name": {
+            "full": "Joseph P. Addabbo Jr.",
+            "first": "Joseph P.",
+            "last": "Addabbo Jr."
+          },
+          "summary": "<p>Summary for Joseph P. Addabbo Jr..</p>",
+          "party": [
+            "D"
+          ],
+          "role": "Chairman of Committee on Racing, Gaming and Wagering",
+          "site": {
+            "url": "https://www.nysenate.gov/senators/joseph-p-addabbo-jr",
+            "district_url": "https://www.nysenate.gov/district/15",
+            "palette_name": "trad_blue",
+            "palette": {
+              "name": "default",
+              "lgt": "#FFFFFF",
+              "med": "#FFFFFF",
+              "drk": "#FFFFFF"
+            },
+            "images": {
+              "headshot": "https://www.nysenate.gov/sites/default/files/headshot_addabbo-hs-profile.jpg",
+              "banner": "https://www.nysenate.gov/sites/default/files/01-04-23_300-01-461.jpg"
+            }
+          }
+        },
+        "contact": {
+          "email": "addabbo@nysenate.gov",
+          "offices": [
+            {
+              "name": "District Office",
+              "street": "84-16 Jamaica Avenue",
+              "additional": "",
+              "city": "Woodhaven",
+              "province": "NY",
+              "postal_code": "11421",
+              "country": "US",
+              "province_name": "New York",
+              "country_name": "United States",
+              "fax": "(718) 296-0495",
+              "phone": "(718) 738-1111"
+            },
+            {
+              "name": "Albany Office",
+              "street": "188 State Street Room 811, Legislative Office Building",
+              "additional": "",
+              "city": "Albany",
+              "province": "NY",
+              "postal_code": "12247",
+              "country": "US",
+              "province_name": "New York",
+              "country_name": "United States",
+              "fax": "(518) 426-6875",
+              "phone": "(518) 455-2322"
+            },
+            {
+              "name": "Satellite Office",
+              "street": "66-85 73rd Place",
+              "additional": "",
+              "city": "Middle Village",
+              "province": "NY",
+              "postal_code": "11379",
+              "country": "US",
+              "province_name": "New York",
+              "country_name": "United States",
+              "fax": "(718) 497-1761",
+              "phone": "(718) 497-1630"
+            }
+          ]
+        },
+        "social_media": {
+          "facebook": "http://www.facebook.com/senatorjoeaddabbo",
+          "twitter": "https://twitter.com/SenJoeAddabbo",
+          "youtube": "https://www.youtube.com/@SenatorJosephAddabbo/videos"
+        }
+      },
+      "Sutton": {
+        "open_leg": {
+          "member_id": "1572",
+          "shortname": "sutton",
+          "district": {
+            "number": 22,
+            "ordinal": "22nd"
+          },
+          "is_active": true
+        },
+        "profile": {
+          "name": {
+            "full": "Sam Sutton",
+            "first": "Sam",
+            "last": "Sutton"
+          },
+          "summary": "<p>Summary for Sam Sutton.</p>",
+          "party": [
+            "D"
+          ],
+          "role": "Chairman of Committee on Administrative Regulations Review Commission (ARRC)",
+          "site": {
+            "url": "https://www.nysenate.gov/senators/sam-sutton",
+            "district_url": "https://www.nysenate.gov/district/22",
+            "palette_name": "trad_blue",
+            "palette": {
+              "name": "default",
+              "lgt": "#FFFFFF",
+              "med": "#FFFFFF",
+              "drk": "#FFFFFF"
+            },
+            "images": {
+              "headshot": "https://www.nysenate.gov/sites/default/files/2025/07/24/sutton-hs-160-160-sd22.jpg",
+              "banner": "https://www.nysenate.gov/sites/default/files/2025/07/24/sd22-sutton-header-photo-680-510.jpg"
+            }
+          }
+        },
+        "contact": {
+          "email": "sutton@nysenate.gov",
+          "offices": [
+            {
+              "name": "District Office",
+              "street": "1412 Avenue J,",
+              "additional": "Suite 2E",
+              "city": "Brooklyn",
+              "province": "NY",
+              "postal_code": "11230",
+              "country": "US",
+              "province_name": "New York",
+              "country_name": "United States",
+              "fax": "",
+              "phone": "718-253-2015"
+            },
+            {
+              "name": "Albany Office",
+              "street": "809 Legislative Office Building",
+              "additional": "",
+              "city": "Albany",
+              "province": "NY",
+              "postal_code": "12247",
+              "country": "US",
+              "province_name": "New York",
+              "country_name": "United States",
+              "fax": "(518) 426-6931",
+              "phone": "(518) 455-2754"
+            }
+          ]
+        }
+      },
+      "martins": {
+        "open_leg": {
+          "member_id": "397",
+          "shortname": "martins",
+          "district": {
+            "number": 7,
+            "ordinal": "7th"
+          },
+          "is_active": true
+        },
+        "profile": {
+          "name": {
+            "full": "Jack M. Martins",
+            "first": "Jack M.",
+            "last": "Martins"
+          },
+          "summary": "<p>Summary for Jack M. Martins.</p>",
+          "party": [
+            "R",
+            "C"
+          ],
+          "role": null,
+          "site": {
+            "url": "https://www.nysenate.gov/senators/jack-m-martins",
+            "district_url": "https://www.nysenate.gov/district/7",
+            "palette_name": "cont_red",
+            "palette": {
+              "name": "default",
+              "lgt": "#FFFFFF",
+              "med": "#FFFFFF",
+              "drk": "#FFFFFF"
+            },
+            "images": {
+              "headshot": "https://www.nysenate.gov/sites/default/files/2025/01/07/sen-martins-2023-hs.png",
+              "banner": "https://www.nysenate.gov/sites/default/files/jack_martins_hs_2023.jpg"
+            }
+          }
+        },
+        "contact": {
+          "email": "martins@nysenate.gov",
+          "offices": [
+            {
+              "name": "ALBANY OFFICE",
+              "street": "Legislative Office Building, Room 608",
+              "additional": "",
+              "city": "Albany",
+              "province": "NY",
+              "postal_code": "12247",
+              "country": "US",
+              "province_name": "New York",
+              "country_name": "United States",
+              "fax": "518-426-6720 ",
+              "phone": "518-455-2677"
+            },
+            {
+              "name": "District Office",
+              "street": "173 Mineola Blvd., Suite 201",
+              "additional": "",
+              "city": "Mineola,",
+              "province": "NY",
+              "postal_code": "11501",
+              "country": "US",
+              "province_name": "New York",
+              "country_name": "United States",
+              "fax": "516-747-0203",
+              "phone": "516-922-1811"
+            }
+          ]
+        },
+        "social_media": {
+          "facebook": "https://www.facebook.com/SenatorJackMartins",
+          "twitter": "https://twitter.com/SenatorMartins",
+          "instagram": "https://www.instagram.com/senatorjackmartins/"
+        }
+      }
+    },
+    "count": 3
+  },
+  "messages": [],
+  "status": "ok"
+}

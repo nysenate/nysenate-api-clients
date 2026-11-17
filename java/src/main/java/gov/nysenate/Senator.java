@@ -1,8 +1,8 @@
 package gov.nysenate;
 
 import java.util.List;
+import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,19 +14,21 @@ public class Senator {
     private String lastName;
     private String shortName;
     private String email;
-    @JsonProperty("img")
     private String imageUrl;
     private String url;
     private String summary;
-    @JsonProperty("party")
     private List<String> parties;
     private String role;
     private List<Office> offices;
-    @JsonProperty("senate_district")
     private Integer districtNumber;
-    @JsonProperty("senate_district_url")
     private String districtUrl;
     private Integer openLegId;
+    private Boolean active;
+    private String districtOrdinal;
+    private String bannerImageUrl;
+    private Palette palette;
+    /** Social media URLs keyed by network name, e.g. "facebook", "twitter", "instagram", "youtube". */
+    private Map<String, String> socialMedia;
 
     public Senator() {}
 }

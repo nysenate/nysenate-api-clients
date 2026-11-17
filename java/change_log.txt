@@ -1,6 +1,17 @@
 ChangeLog
 --------------
 
+3.1.0 - 2026-11-17
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Read senators from the new NYSenate.gov feed at /nys_feeds/senators, which replaces /senators.json
+* Parse the feed's nested format (open_leg / profile / contact) into the existing Senator model; existing getters are unchanged
+* Senator: added active, districtOrdinal, bannerImageUrl, palette (new Palette record), and socialMedia (map of network name to URL, empty when the senator has none)
+* Office: added province, provinceName, country, and countryName. The record's constructor now takes these extra components, so code that constructs an Office directly needs updating; accessors are unchanged
+* Accept an empty JSON array where the feed would normally send an object
+* Follow HTTP redirects
+* Added offline parsing tests; the live test can target another site with -Dnysenate.domain=...
+
 3.0.1 - 2026-10-26
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
